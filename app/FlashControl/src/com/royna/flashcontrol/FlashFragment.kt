@@ -35,7 +35,7 @@ import androidx.preference.PreferenceManager
 
 import com.android.settingslib.widget.MainSwitchPreference
 import com.android.settingslib.widget.OnMainSwitchChangeListener
-import com.android.settingslib.widget.RadioButtonPreference
+import com.android.settingslib.widget.SelectorWithWidgetPreference
 
 import java.lang.IllegalStateException
 
@@ -66,7 +66,7 @@ class FlashFragment : PreferenceFragmentCompat(), OnMainSwitchChangeListener {
         val mSavedIntesity = mSharedPreferences.getInt(PREF_FLASH_INTESITY, 1)
 
         for ((key, value) in PREF_FLASH_MODES) {
-            val preference = findPreference<RadioButtonPreference>(key)!!
+            val preference = findPreference<electorWithWidgetPreference>(key)!!
             preference.isChecked = value == mSavedIntesity
             preference.isEnabled = switchBar.isChecked
             preference.setOnPreferenceClickListener {
@@ -147,7 +147,7 @@ class FlashFragment : PreferenceFragmentCompat(), OnMainSwitchChangeListener {
 
     private fun changeRadioButtons(enable: Boolean) {
         for ((key, _) in PREF_FLASH_MODES) {
-            val mPreference = findPreference<RadioButtonPreference>(key)!!
+            val mPreference = findPreference<electorWithWidgetPreference>(key)!!
             mPreference.isEnabled = enable
         }
     }
@@ -163,7 +163,7 @@ class FlashFragment : PreferenceFragmentCompat(), OnMainSwitchChangeListener {
         }
         mService.setBrightness(intesity)
         for ((key, value) in PREF_FLASH_MODES) {
-            val preference = findPreference<RadioButtonPreference>(key)!!
+            val preference = findPreference<electorWithWidgetPreference>(key)!!
             preference.isChecked = value == intesity
         }
         mSharedPreferences.edit().putInt(PREF_FLASH_INTESITY, intesity).apply()
